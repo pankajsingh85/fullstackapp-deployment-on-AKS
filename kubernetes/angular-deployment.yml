@@ -16,8 +16,8 @@ spec:
         image: pankajsingh8540/frontend:latest
         resources:
           limits:
-            memory: "1Gi"
-            cpu: "128m"
+            memory: "500Mi"   #500 megabytes
+            cpu: "18m"       #1.0 or 1000m 
         ports:
         - containerPort: 80
 ---
