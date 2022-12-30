@@ -1,0 +1,41 @@
+version: '3.2' # specify docker-compose version
+ 
+# Define the services/ containers to be run
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: exit_test
+    ports:
+      - 3307:3306
+    volumes: 
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+
+  
+  node: # name of the second service
+    image: backend
+    build: backend # specify the directory of the Dockerfile
+    environment:
+      MYSQL_DATABASE: exit_test
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root1234
+      MYSQL_HOST: db
+    ports:
+      - "5000:5000"
+    # network_mode: "host"
+    depends_on:
+      - db
+
+  angular: # name of the first service
+    image: frontend
+    build: frontend # specify the directory of the Dockerfile
+    ports:
+    - "4200:80" 
+volumes:
+  db-config:
+  db-data:
+
+ 

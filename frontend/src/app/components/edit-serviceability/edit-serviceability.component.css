@@ -1,0 +1,18 @@
+body {
+    font: 400 15px Lato, sans-serif;
+    line-height: 1.8;
+    color: #818181;
+}
+
+.card{
+    background-color: #0f0b91;
+}
+
+form{
+    width:50%;
+    margin: 0 auto;
+    display: block;
+    border-style: solid;
+    color: rgb(240, 246, 250);
+    background-color: rgb(86, 159, 181);
+}

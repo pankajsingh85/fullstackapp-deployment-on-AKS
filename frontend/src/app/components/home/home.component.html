@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Product Catalog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+</head>
+
+<body>
+
+
+
+
+    <div class="header-container">
+        <div class="container">
+            <div class="row">
+                <h1 class="text-white text-center col-5">PRODUCT CATALOG <p class="text-white">Mobile Shopping</p>
+                </h1>
+                <!-- search form -->
+                <div class="offset-1 col-6">
+                    <div class="row">
+                        <form class="searchForm" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                            <span class="noData" *ngIf="noData">Enter at least one data</span>
+                            <br>
+                            <input type="text" class="col-3" formControlName="productBrand" placeholder="BRAND">&nbsp;
+                            <input type="text" class="col-3" formControlName="productName" placeholder="NAME">&nbsp;
+                            <input type="number" class="col-3" formControlName="productCode" placeholder="PRODUCT CODE">
+                            &nbsp;
+                            <button type="submit" class="col-2 btn btn-primary">SEARCH</button>
+                        </form>
+                    </div>
+                    <br>
+                    <!-- filter form -->
+                    <form *ngIf="isLogin" [formGroup]="filterForm" (ngSubmit)="onFilterSubmit()">
+                        <div class="row">
+                            <label for="price" class="offset-2 col-1 text-white">Price:</label>&nbsp;&nbsp;
+            
+                            <input type="range" class="col-5" formControlName="productPrice" id="slider" value="2000"
+                                min="0" max="10000" (ngModelChange)="showValueOnFilterForm()"> &nbsp; &nbsp;
+                            <input type="submit" class="btn btn-primary col-2" value="Filter Price">
+                        </div>
+                        <div class="row">
+                            <span class="offset-5" id="selectValue"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default ">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul *ngIf="!isLogin" class="nav navbar-nav navbar-right">
+                    <li><a href="/loginAdmin">ADMIN</a></li>
+                </ul>
+                <ul *ngIf="!isLogin" class="nav navbar-nav navbar-right">
+                    <li><a href="/login">LOGIN</a></li>
+                </ul>
+                <ul *ngIf="!isLogin" class="nav navbar-nav navbar-right">
+                    <li><a href="/register">REGISTER</a></li>
+                </ul>
+                <div *ngIf="isLogin" class="nav navbar-nav navbar-left text-white">
+                    {{username}}
+                </div>
+                <div *ngIf="isLogin" class="nav navbar-nav navbar-right">
+                    <button class="btn-primary" (click)="onlogout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <span class="" id="box" *ngIf="isClicked && !isLogin">
+        Please login first <a href="/login">Login Here</a>
+    </span>
+
+    <!-- products -->
+    <div class="container-fluid text-center">
+        <h2>PRODUCTS</h2>
+        <!-- //if no data  -->
+        <h2 class="noData" *ngIf="!isData">No Record Found</h2>
+        <br>
+        <div class="col-md-4" *ngFor="let product of products">
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 25rem;">
+                        <img  src="http://172.29.79.29:30237/{{product.productImage}}" 
+                            class="card-img-top p-3 m-2" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.productName}}</h5>
+                            <h6 class="card-subtitle mb-2">{{product.productBrand}}</h6>
+                            <div class="row">
+                                <button class="btn btn-primary offset-1 col-5"
+                                    (click)="OnSelectDetails(product.productCode)">Show Details</button>&nbsp;&nbsp;
+                                <button class="btn btn-info col-5" (click)="OnSelectPrice(product.productCode)">Show
+                                    Price</button>
+                            </div>
+                            <span *ngIf="isLogin && product.productCode==productCode ">{{price}}</span>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </div>
+
+
+    <!--Contact  -->
+    <div class="container-fluid contact">
+
+        <div class="row ">
+            <h2 class="offset-5 col-3 text-white">CONTACT</h2>
+            <div class="col-sm-5 offset-4 ">
+                <div class="row">
+
+                    <p class="col-3 contact-text"><span class="contact-text glyphicon glyphicon-map-marker"></span>
+                        Delhi, India</p>
+                    <p class="col-4 contact-text"><span class="contact-text glyphicon glyphicon-phone"></span> +91
+                        9191919191</p>
+                    <p class=" col-5 contact-text"><span class="contact-text glyphicon glyphicon-envelope"></span>
+                        pankajsingh8540@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

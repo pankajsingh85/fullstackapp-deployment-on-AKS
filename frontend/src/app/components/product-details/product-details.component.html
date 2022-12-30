@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Product Details</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="header-container text-center">
+        <div class="container">
+        <h1>PRODUCT CATALOG</h1>
+        <p>Mobile Shopping</p>
+        </div>
+    </div>
+    
+    <div class="container-fluid text-center m-2">
+        <h2>PRODUCTS</h2>
+        <br>
+        <div *ngFor="let product of products">
+            <div class="row">
+                <div class="offset-1 col-4">
+                    <img style="border:1px solid green" src="https://backend3211.azurewebsites.net/{{product.productImage}}"
+                        style="width:300px;height:300px;" />
+                    <br>
+                    Name: <b> {{product.productName}} </b>
+                    <br> Brand: <b> {{product.productBrand}} </b>
+                    <br> Price:<b> {{product.productPrice}} </b>
+                </div>
+                <div class="col-6">
+                    <br> Description: <b> {{product.productDescription}} </b>
+                    <h5>Check Product Serviceability</h5>
+                    <div class="row">
+                        <form [formGroup]="serviceAbilityForm" (ngSubmit)="onSubmit()">
+                            <input type="number" class="col-3" formControlName="pinCode" placeholder="Pin Code"
+                                [ngClass]="{ 'is-invalid': submitted && f['pinCode'].errors}">
+                            <button type="submit" class="btn btn-primary offset-1 col-2">submit</button>
+                            <span *ngIf="submitted && f['pinCode'].errors" class="invalid-feedback">
+                                <span *ngIf="f['pinCode'].errors['required']">pinCode is required</span>
+                                <span *ngIf="f['pinCode'].errors['pattern']">pinCode must be Valid</span>
+                            </span>
+
+                            <input type="hidden" formControlName="productCode" name="productCode" readonly>
+                        </form>
+                    </div>
+                    <span *ngIf="isServiceAble && isSubmit" class="serviceSuccess">yayy!! we are available in this
+                        area</span>
+                    <br>
+                    <span *ngIf="isServiceAble && isSubmit" class="serviceSuccess">expected delivery date {{date}}
+                    </span>
+                    <span *ngIf="!isServiceAble && isSubmit" class="serviceFail">sorry,currently we are not available in
+                        this area</span>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

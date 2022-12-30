@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>editService</title>
+</head>
+
+<body>
+        <div class="card  ">
+            <div class="card-body ">
+                <h4 class="card-title text-center text-white">ProductCatalog</h4>
+            </div>
+        </div>
+        <div class="container mt-5 ">
+            <div class="text-center">
+                <h4>EditService</h4>
+            </div>
+
+            <form   [formGroup]="editForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+
+                    <div class=" form-group row m-4">
+                        <label for="id" class="col-2 col-form-label ">id</label>&nbsp;&nbsp;&nbsp;
+                        <div class="col-5">
+                            <input type="number" class="form-control" formControlName="id" name="id"
+                                placeholder="id" readonly >
+                        </div>
+                    </div>
+
+                    <div class=" form-group row m-4">
+                        <label for="pinCode" class="col-2 col-form-label ">PinCode</label>&nbsp;&nbsp;&nbsp;
+                        <div class="col-5">
+                            <input type="number" class="form-control" formControlName="pinCode" name="pinCode"
+                                placeholder="PinCode" [ngClass]="{ 'is-invalid': submitted && f['pinCode'].errors}" >
+                                <div *ngIf="submitted &&  f['pinCode'].errors" class="invalid-feedback">
+                                    <div *ngIf= "f['pinCode'].errors['required']">pincode is required</div>
+                                    <span *ngIf="f['pinCode'].errors['pattern']">pinCode must be Valid</span>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class=" form-group row m-4">
+                        <label for="productCode" class="col-2 col-form-label ">ProductCode</label>&nbsp;&nbsp;&nbsp;
+                        <div class="col-5">
+                            <input type="number" class="form-control" formControlName="productCode" 
+                                placeholder="Prdouct Code" [ngClass]="{ 'is-invalid': submitted && f['productCode'].errors}" >
+                                <div *ngIf="submitted &&  f['productCode'].errors" class="invalid-feedback">
+                                    <div *ngIf= "f['productCode'].errors['required']">productCode is required</div>
+                                    <div *ngIf="f['productCode'].errors['min']">Minimum number is 1. </div> 
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class=" form-group row m-4">
+                        <label for="quantity" class="col-2 col-form-label ">Quantity</label>&nbsp;&nbsp;&nbsp;
+                        <div class="col-5">
+                            <input type="number" class="form-control" formControlName="quantity" 
+                                placeholder="quantity" [ngClass]="{ 'is-invalid': submitted && f['quantity'].errors}" >
+                                <div *ngIf="submitted &&  f['quantity'].errors" class="invalid-feedback">
+                                    <div *ngIf= "f['quantity'].errors['required']">quantity is required</div>
+                                    <div *ngIf="f['quantity'].errors['min']">Minimum number is 0. </div> 
+                                </div>
+                        </div>
+                    </div>
+                    <div class=" form-group row m-4">
+                        <button type="submit" class="btn btn-primary  col-3">Edit Service</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</body>
+
+</html>

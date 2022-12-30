@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="card ">
+        <div class="card-body ">
+            <h4 class="card-title text-center text-white">ProductCatalog</h4>
+        </div>
+    </div>
+
+
+    <div class="text-center mt-5">
+        <h4>Login Page</h4>
+    </div>
+
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <span *ngIf="isInvalid" id="isInvalid" class="col-2">Invalid User Credentials</span>
+        <div class=" form-group row m-4">
+            <label for="name" class="col-2 col-form-label ">Email</label>
+            <div class="col-4">
+                <input type="text" class="form-control" formControlName="email" cname="email" placeholder="Email"
+                    [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                <div *ngIf="submitted &&  f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors['required']">Email is required</div>
+                    <div *ngIf="f['email'].errors['pattern']">Email must be Valid</div>
+                    <div *ngIf="f['email'].errors['minlength']">Email must be at least 5 characters</div>
+                    <div *ngIf=" f['email'].errors['maxlength']">name must be at most 30 characters</div>
+                </div>
+            </div>
+        </div>
+
+        <div class=" form-group row m-4">
+            <label for="password" class="col-2 col-form-label ">Password</label>
+            <div class="col-4">
+                <input type="password" class="form-control" formControlName="password" c name="password"
+                    placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                <div *ngIf="submitted &&  f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors['required']">password is required</div>
+                    <div *ngIf=" f['password'].errors['minlength']">password must be at least 3 characters
+                    </div>
+                    <div *ngIf=" f['password'].errors['maxlength']">password must be at most 30 characters
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class=" form-group row m-4">
+            <button type="submit" class="btn btn-primary col-2 ">Login</button>
+            <a href="/register" role="button" class="btn btn-info ml-2 p-3 col-4 ">Create An Account</a>
+        </div>
+    </form>
+
+</body>
+
+</html>

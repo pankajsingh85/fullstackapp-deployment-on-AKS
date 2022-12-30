@@ -1,0 +1,30 @@
+
+body {
+    font: 400 15px Lato, sans-serif;
+    line-height: 1.8;
+    color: #da5b5b;
+    height:100vh;
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+}
+
+.card{
+    background-color: #0f0b91;
+}
+
+form{
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    border-style: solid;
+    color: rgb(240, 246, 250);
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+}
+
+.isInvalid{
+    color: #da5b5b;
+}
+
